@@ -1,0 +1,29 @@
+# ---------------------------------
+# Below recommendations from http://www.enigmeta.com/blog/starting-flask/
+# ---------------------------------
+#
+# Virtualenv
+.Python
+bin
+lib
+include
+*.py[cod]
+
+# Mac OS X custom attribute files
+*.DS_Store
+
+# ---------------------------------
+# Below recommendations from https://github.com/realpython/flask-by-example/blob/master/.gitignore
+# (per https://realpython.com/blog/python/flask-by-example-part-1-project-setup/)
+# ---------------------------------
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
