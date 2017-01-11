@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, abort
 from flask_restful import Api, Resource
 
 app = Flask(__name__)
@@ -40,7 +40,10 @@ class UserListAPI(Resource):
 
 class UserAPI(Resource):
     def get(self, id):
-        pass
+        user = [user for user in users if user['id'] == id]
+        if len(user) == 0:
+            abort(404)
+        return { 'user': user[0] }
 
     def post(self, id):
         pass
