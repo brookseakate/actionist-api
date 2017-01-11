@@ -1,5 +1,5 @@
 from flask import Flask, abort
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse, fields, marshal
 
 app = Flask(__name__)
 api = Api(app)
@@ -31,28 +31,76 @@ users = [
     }
 ]
 
+user_public_fields = {
+    'id': fields.Integer,
+    'user_name': fields.String,
+    'first_name': fields.String,
+    'last_name': fields.String,
+    'about': fields.String,
+    'zip': fields.String,
+    'uri': fields.Url('user', absolute=True)
+    # 'uri': fields.Url('user', absolute=True, scheme='https') # @TODO: use this for https!
+}
+
 class UserListAPI(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('user_name', type = str, required = True, help = 'No user name provided', location = 'json')
+        self.reqparse.add_argument('first_name', type = str, required = True, help = 'No first name provided', location = 'json')
+        self.reqparse.add_argument('last_name', type = str, required = True, help = 'No last name provided', location = 'json')
+        self.reqparse.add_argument('zip', type = str, required = True, help = 'No zip code provided', location = 'json')
+        self.reqparse.add_argument('about', type = str, default = '', location = 'json')
+        super(UserListAPI, self).__init__()
+
     def get(self):
-        return { 'users': users }
+        return { 'users': [marshal(user, user_public_fields) for user in users] }
 
     def post(self):
-        pass
+        args = self.reqparse.parse_args()
+        new_user = {
+            'id': users[-1]['id'] + 1,
+            'user_name': args['user_name'],
+            'first_name': args['first_name'],
+            'last_name': args['last_name'],
+            'about': args['about'],
+            'zip': args['zip'],
+        }
+        users.append(new_user)
+        return { 'user': marshal(new_user, user_public_fields) }, 201
 
 class UserAPI(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('user_name', type = str, location = 'json')
+        self.reqparse.add_argument('first_name', type = str, location = 'json')
+        self.reqparse.add_argument('last_name', type = str, location = 'json')
+        self.reqparse.add_argument('zip', type = str, location = 'json')
+        self.reqparse.add_argument('about', type = str, location = 'json')
+        super(UserAPI, self).__init__()
+
     def get(self, id):
         user = [user for user in users if user['id'] == id]
         if len(user) == 0:
             abort(404)
-        return { 'user': user[0] }
-
-    def post(self, id):
-        pass
+        return { 'user': marshal(user[0], user_public_fields) }
 
     def put(self, id):
-        pass
+        user = [user for user in users if user['id'] == id]
+        if len(user) == 0:
+            abort(404)
+        user = user[0]
+        args = self.reqparse.parse_args()
+        for k, v in args.iteritems():
+            if v != None:
+                user[k]= v
+        return { 'user': marshal(user, user_public_fields) }
 
     def delete(self, id):
-        pass
+        user = [user for user in users if user['id'] == id]
+        if len(user) == 0:
+            abort(404)
+        users.remove(user[0])
+        return { 'result': True }
 
 api.add_resource(UserListAPI, '/api/v1.0/users', endpoint = 'users')
 api.add_resource(UserAPI, '/api/v1.0/users/<int:id>', endpoint = 'user')
