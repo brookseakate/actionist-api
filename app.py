@@ -1,6 +1,6 @@
 # imports
 from flask import Flask, abort
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api, Resource, reqparse, fields, marshal
 
 # App setup
@@ -36,6 +36,28 @@ users_array = [
         'zip': '02912'
     }
 ]
+
+# User model (test)
+class User(db.Model, CRUD):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(28), unique=True)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(30))
+    about = db.Column(db.Text)
+    zip = db.Column(db.String(5))
+
+    # @TODO - remove, this is redundant with how SQLAlchemy models get built.
+    # def __init__(self, args):
+    #     # id?
+    #     self.user_name = args['user_name']
+    #     self.first_name = args['first_name']
+    #     self.last_name = args['last_name']
+    #     self.about = args['about']
+    #     self.zip = args['zip']
+
+    def __repr__(self):
+        return '<User %r>' % self.user_name
 
 # public field definitions (for use with marshal)
 user_public_fields = {
@@ -113,6 +135,12 @@ class UserAPI(Resource):
 # register routes
 api.add_resource(UserListAPI, '/api/v1.0/users', endpoint = 'users')
 api.add_resource(UserAPI, '/api/v1.0/users/<int:id>', endpoint = 'user')
+
+# create/update database to match SQLAlchemy models
+db.create_all()
+
+# # @TODO - comment out! this drops the test databases
+# db.drop_all()
 
 # make file executable if main
 if __name__ == '__main__':
