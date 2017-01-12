@@ -37,6 +37,19 @@ users_array = [
     }
 ]
 
+# Class to add, update and delete data via SQLAlchemy sessions
+class CRUD():
+    def add(self, resource):
+        db.session.add(resource)
+        return db.session.commit()
+
+    def update(self):
+        return db.session.commit()
+
+    def delete(self, resource):
+        db.session.delete(resource)
+        return db.session.commit()
+
 # User model (test)
 class User(db.Model, CRUD):
     __tablename__ = 'users'
@@ -83,20 +96,41 @@ class UserListAPI(Resource):
         super(UserListAPI, self).__init__()
 
     def get(self):
-        return { 'users': [marshal(user, user_public_fields) for user in users] }
+        # NOTE: this *works* for getting data from db!
+        users_query = User.query.all()
+        return { 'users': [marshal(user, user_public_fields) for user in users_query] }
+
+        # users_query = User.query.all()
+        # return jsonify({ 'users': users_query })
+
+
+        # @TODO - remove, this was for hard-coded array of users
+        # return { 'users': [marshal(user, user_public_fields) for user in users] }
 
     def post(self):
         args = self.reqparse.parse_args()
-        new_user = {
-            'id': users[-1]['id'] + 1,
-            'user_name': args['user_name'],
-            'first_name': args['first_name'],
-            'last_name': args['last_name'],
-            'about': args['about'],
-            'zip': args['zip'],
-        }
-        users.append(new_user)
+        new_user = User(
+            user_name = args['user_name'],
+            first_name = args['first_name'],
+            last_name = args['last_name'],
+            about = args['about'],
+            zip = args['zip']
+        )
+        new_user.add(new_user)
         return { 'user': marshal(new_user, user_public_fields) }, 201
+
+        # @TODO - remove, this was for hard-coded array of users
+        # args = self.reqparse.parse_args()
+        # new_user = {
+        #     'id': users[-1]['id'] + 1,
+        #     'user_name': args['user_name'],
+        #     'first_name': args['first_name'],
+        #     'last_name': args['last_name'],
+        #     'about': args['about'],
+        #     'zip': args['zip'],
+        # }
+        # users.append(new_user)
+        # return { 'user': marshal(new_user, user_public_fields) }, 201
 
 class UserAPI(Resource):
     def __init__(self):
