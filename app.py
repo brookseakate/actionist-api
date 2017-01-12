@@ -1,13 +1,16 @@
+# imports
 from flask import Flask, abort
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_restful import Api, Resource, reqparse, fields, marshal
 
+# App setup
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 api = Api(app)
 
-users = [
+# Users array (hard-coded initial data)
+users_array = [
     {
         'id': 1,
         'user_name': 'quokka',
@@ -34,6 +37,7 @@ users = [
     }
 ]
 
+# public field definitions (for use with marshal)
 user_public_fields = {
     'id': fields.Integer,
     'user_name': fields.String,
@@ -45,6 +49,7 @@ user_public_fields = {
     # 'uri': fields.Url('user', absolute=True, scheme='https') # @TODO: use this for https!
 }
 
+# define resources, routes, and argument validation
 class UserListAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
@@ -105,9 +110,10 @@ class UserAPI(Resource):
         users.remove(user[0])
         return { 'result': True }
 
+# register routes
 api.add_resource(UserListAPI, '/api/v1.0/users', endpoint = 'users')
 api.add_resource(UserAPI, '/api/v1.0/users/<int:id>', endpoint = 'user')
 
-# NOTE: do not remove!
+# make file executable if main
 if __name__ == '__main__':
     app.run(debug=True)
