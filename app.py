@@ -1,7 +1,10 @@
 from flask import Flask, abort
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask_restful import Api, Resource, reqparse, fields, marshal
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
+db = SQLAlchemy(app)
 api = Api(app)
 
 users = [
