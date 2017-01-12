@@ -108,6 +108,7 @@ class UserListAPI(Resource):
         # return { 'users': [marshal(user, user_public_fields) for user in users] }
 
     def post(self):
+        # NOTE: this *works* with db!
         args = self.reqparse.parse_args()
         new_user = User(
             user_name = args['user_name'],
@@ -143,28 +144,49 @@ class UserAPI(Resource):
         super(UserAPI, self).__init__()
 
     def get(self, id):
-        user = [user for user in users if user['id'] == id]
-        if len(user) == 0:
-            abort(404)
-        return { 'user': marshal(user[0], user_public_fields) }
+        # NOTE: this *works* for getting data from db!
+        user = User.query.get_or_404(id)
+        return { 'user': marshal(user, user_public_fields) }
+
+        # @TODO - remove, this was for hard-coded array of users
+        # user = [user for user in users if user['id'] == id]
+        # if len(user) == 0:
+        #     abort(404)
+        # return { 'user': marshal(user[0], user_public_fields) }
 
     def put(self, id):
-        user = [user for user in users if user['id'] == id]
-        if len(user) == 0:
-            abort(404)
-        user = user[0]
+        # NOTE: this *works* with db!
+        user = User.query.get_or_404(id)
         args = self.reqparse.parse_args()
         for k, v in args.iteritems():
             if v != None:
-                user[k]= v
-        return { 'user': marshal(user, user_public_fields) }
+                setattr(user, k, v)
+        user.update()
+        return self.get(id)
+
+        # @TODO - remove, this was for hard-coded array of users
+        # user = [user for user in users if user['id'] == id]
+        # if len(user) == 0:
+        #     abort(404)
+        # user = user[0]
+        # args = self.reqparse.parse_args()
+        # for k, v in args.iteritems():
+        #     if v != None:
+        #         user[k]= v
+        # return { 'user': marshal(user, user_public_fields) }
 
     def delete(self, id):
-        user = [user for user in users if user['id'] == id]
-        if len(user) == 0:
-            abort(404)
-        users.remove(user[0])
+        # NOTE: this *works* with db!
+        user = User.query.get_or_404(id)
+        user.delete(user)
         return { 'result': True }
+
+        # # @TODO - remove, this was for hard-coded array of users
+        # user = [user for user in users if user['id'] == id]
+        # if len(user) == 0:
+        #     abort(404)
+        # users.remove(user[0])
+        # return { 'result': True }
 
 # register routes
 api.add_resource(UserListAPI, '/api/v1.0/users', endpoint = 'users')
