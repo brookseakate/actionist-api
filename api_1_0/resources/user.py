@@ -4,13 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, reqparse, fields, marshal
 
 # relative imports
-from models.models import User
-# from models.models import CRUD, User # @TODO - remove
+from ..models import User
+# from ..models import CRUD, User # @TODO - remove
 
-# App setup
-app = Flask(__name__)
-app.config.from_pyfile('../config.py')
-db = SQLAlchemy(app)
+# from ../..app import app, db
+# # @TODO - remove
+# # App setup
+# app = Flask(__name__)
+# app.config.from_pyfile('../../config.py')
+# db = SQLAlchemy(app)
 
 # public field definitions (for use with marshal)
 user_public_fields = {
@@ -94,7 +96,7 @@ class UserAPI(Resource):
         self.reqparse.add_argument('city', type = str, location = 'json')
         self.reqparse.add_argument('state', type = str, location = 'json')
         self.reqparse.add_argument('zip', type = str, location = 'json')
-        
+
         super(UserAPI, self).__init__()
 
     def get(self, id):

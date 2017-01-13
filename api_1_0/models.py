@@ -2,10 +2,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-# App setup
-app = Flask(__name__)
-app.config.from_pyfile('../../config.py')
-db = SQLAlchemy(app)
+from app import db
+# # @TODO - remove
+# # App setup
+# app = Flask(__name__)
+# app.config.from_pyfile('../config.py')
+# db = SQLAlchemy(app)
 
 # Class to add, update and delete data via SQLAlchemy sessions
 class CRUD():
