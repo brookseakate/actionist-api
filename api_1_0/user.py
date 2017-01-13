@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, reqparse, fields, marshal
 
 # relative imports
-from models.models import *
+from models.models import User
+# from models.models import CRUD, User # @TODO - remove
 
 # App setup
 app = Flask(__name__)
@@ -15,9 +16,15 @@ db = SQLAlchemy(app)
 user_public_fields = {
     'id': fields.Integer,
     'user_name': fields.String,
+    'device_id': fields.String, # @TODO - remove?
+    'email': fields.String,
     'first_name': fields.String,
     'last_name': fields.String,
     'about': fields.String,
+    'street_address_1': fields.String,
+    'street_address_2': fields.String,
+    'city': fields.String,
+    'state': fields.String,
     'zip': fields.String,
     'uri': fields.Url('user', absolute=True)
     # @TODO: use below version for https!
@@ -28,11 +35,20 @@ user_public_fields = {
 class UserListAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('user_name', type = str, required = True, help = 'No user name provided', location = 'json')
-        self.reqparse.add_argument('first_name', type = str, required = True, help = 'No first name provided', location = 'json')
-        self.reqparse.add_argument('last_name', type = str, required = True, help = 'No last name provided', location = 'json')
-        self.reqparse.add_argument('zip', type = str, required = True, help = 'No zip code provided', location = 'json')
-        self.reqparse.add_argument('about', type = str, default = '', location = 'json')
+        self.reqparse.add_argument('user_name', type = str, location = 'json')
+        self.reqparse.add_argument('device_id', type = str, location = 'json')
+        # # @TODO - require device_id argument!
+        # self.reqparse.add_argument('device_id', type = str, required = True, help = 'Device ID required', location = 'json')
+        self.reqparse.add_argument('email', type = str, location = 'json')
+        self.reqparse.add_argument('first_name', type = str, location = 'json')
+        self.reqparse.add_argument('last_name', type = str, location = 'json')
+        self.reqparse.add_argument('about', type = str, location = 'json')
+        self.reqparse.add_argument('street_address_1', type = str, location = 'json')
+        self.reqparse.add_argument('street_address_2', type = str, location = 'json')
+        self.reqparse.add_argument('city', type = str, location = 'json')
+        self.reqparse.add_argument('state', type = str, location = 'json')
+        self.reqparse.add_argument('zip', type = str, location = 'json')
+
         super(UserListAPI, self).__init__()
 
     def get(self):
@@ -44,9 +60,15 @@ class UserListAPI(Resource):
             args = self.reqparse.parse_args()
             new_user = User(
                 user_name = args['user_name'],
+                device_id = args['device_id'],
+                email = args['email'],
                 first_name = args['first_name'],
                 last_name = args['last_name'],
                 about = args['about'],
+                street_address_1 = args['street_address_1'],
+                street_address_2 = args['street_address_2'],
+                city = args['city'],
+                state = args['state'],
                 zip = args['zip']
             )
             new_user.add(new_user)
@@ -62,10 +84,17 @@ class UserAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('user_name', type = str, location = 'json')
+        self.reqparse.add_argument('device_id', type = str, location = 'json')
+        self.reqparse.add_argument('email', type = str, location = 'json')
         self.reqparse.add_argument('first_name', type = str, location = 'json')
         self.reqparse.add_argument('last_name', type = str, location = 'json')
-        self.reqparse.add_argument('zip', type = str, location = 'json')
         self.reqparse.add_argument('about', type = str, location = 'json')
+        self.reqparse.add_argument('street_address_1', type = str, location = 'json')
+        self.reqparse.add_argument('street_address_2', type = str, location = 'json')
+        self.reqparse.add_argument('city', type = str, location = 'json')
+        self.reqparse.add_argument('state', type = str, location = 'json')
+        self.reqparse.add_argument('zip', type = str, location = 'json')
+        
         super(UserAPI, self).__init__()
 
     def get(self, id):
