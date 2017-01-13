@@ -58,7 +58,7 @@ class CallActionListAPI(Resource):
 
     def get(self):
         call_actions_query = CallAction.query.all()
-        return { 'call_actions': [marshal(call_action, call_action_public_fields) for call_action in call_actions] }
+        return { 'call_actions': [marshal(call_action, call_action_public_fields) for call_action in call_actions_query] }
 
     def post(self):
         try:
