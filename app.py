@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
 
 # relative imports
-from api_1_0.models.models import *
-from api_1_0.user import *
+from api_1_0.models.models import CRUD, User
+from api_1_0.user import UserListAPI, UserAPI
 
 # App setup
 app = Flask(__name__)
@@ -17,8 +17,8 @@ api = Api(app)
 api.add_resource(UserListAPI, '/api/v1.0/users', endpoint = 'users')
 api.add_resource(UserAPI, '/api/v1.0/users/<int:id>', endpoint = 'user')
 
-# create/update database to match SQLAlchemy models
-db.create_all()
+# # create/update database to match SQLAlchemy models
+# db.create_all()
 
 # # @TODO - comment out! this drops the test databases
 # db.drop_all()
