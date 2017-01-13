@@ -4,15 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, reqparse, fields, marshal
 
 # relative imports
+from ..app import db
 from ..models import User
-# from ..models import CRUD, User # @TODO - remove
-
-# from ../..app import app, db
-# # @TODO - remove
-# # App setup
-# app = Flask(__name__)
-# app.config.from_pyfile('../../config.py')
-# db = SQLAlchemy(app)
 
 # public field definitions (for use with marshal)
 user_public_fields = {

@@ -4,16 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, reqparse, fields, marshal
 
 # relative imports
+from ..app import db
 from ..models import CallAction
-# from ..models import User # likely to need this...
-# from ..models import CRUD, CallAction # @TODO - remove
-
-# from ../..app import app, db
-# # @TODO - remove
-# # App setup
-# app = Flask(__name__)
-# app.config.from_pyfile('../../config.py')
-# db = SQLAlchemy(app)
+# from ..models import CallAction, User # @TODO - remove? likely to need this...
 
 # public field definitions (for use with marshal)
 # @TODO - update to send detailed user info rather than just user_id?

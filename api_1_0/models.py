@@ -1,13 +1,9 @@
-# imports
+# package imports
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+# relative imports
 from app import db
-# # @TODO - remove
-# # App setup
-# app = Flask(__name__)
-# app.config.from_pyfile('../config.py')
-# db = SQLAlchemy(app)
 
 # Class to add, update and delete data via SQLAlchemy sessions
 class CRUD():
@@ -49,7 +45,7 @@ class User(db.Model, CRUD):
     def __repr__(self):
         return '<User %r>' % self.user_name
 
-    # # @TODO - implement or remove __init__
+    # # @TODO - implement or remove __init__'s
     # def __init__(self, ..args)
 
 # CallAction model
@@ -111,7 +107,3 @@ class EventAction(db.Model, CRUD):
     kudos_text = db.Column(db.String(100))
     # relationship to User who posted this action:
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-# # @TODO - remove
-# # create/update database to match SQLAlchemy models
-# db.create_all()
