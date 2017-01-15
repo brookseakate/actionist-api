@@ -20,7 +20,7 @@ email_action_public_fields = {
     'target_name': fields.String,
     'target_official_type': fields.String,
     'email_subject': fields.String,
-    'body': fields.String,
+    'email_body': fields.String(attribute='body'),
     'kudos_text': fields.String,
     'uri': fields.Url('email_action', absolute=True),
     # @TODO: use below version for https!

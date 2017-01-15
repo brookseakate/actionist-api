@@ -14,6 +14,7 @@ from resources.user import UserListAPI, UserAPI
 from resources.call_action import CallActionListAPI, CallActionAPI
 from resources.email_action import EmailActionListAPI, EmailActionAPI
 from resources.event_action import EventActionListAPI, EventActionAPI
+from resources.action import ActionListAPI
 
 # # @TODO - remove, unneeded
 # from models import User, CallAction, EmailAction, EventAction
@@ -27,3 +28,4 @@ api.add_resource(EmailActionListAPI, '/api/v1.0/email_actions', endpoint = 'emai
 api.add_resource(EmailActionAPI, '/api/v1.0/email_actions/<int:id>', endpoint = 'email_action')
 api.add_resource(EventActionListAPI, '/api/v1.0/event_actions', endpoint = 'event_actions')
 api.add_resource(EventActionAPI, '/api/v1.0/event_actions/<int:id>', endpoint = 'event_action')
+api.add_resource(ActionListAPI, '/api/v1.0/actions', endpoint = 'actions')
