@@ -63,7 +63,7 @@ class EmailActionListAPI(Resource):
                 description = args['description'],
                 list_start_datetime = args['list_start_datetime'],
                 list_end_datetime = args['list_end_datetime'],
-                target_email = args['target_phone_number'],
+                target_email = args['target_email'],
                 target_name = args['target_name'],
                 target_official_type = args['target_official_type'],
                 email_subject = args['email_subject'],
