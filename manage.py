@@ -11,8 +11,9 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 # Add seed data to the db
-@manager.command
+@manager.option('-c', '--count', help='Quantity of records to seed')
 def dbseed(count):
+    count = int(count)
     Seeder.seed_users(count)
     Seeder.seed_call_actions(count)
     Seeder.seed_email_actions(count)
