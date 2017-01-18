@@ -1,8 +1,8 @@
 # ---------------------------------
 # Secrets!
 # ---------------------------------
-config.py
 environment.py
+.env
 
 # ---------------------------------
 # Below recommendations from http://www.enigmeta.com/blog/starting-flask/
