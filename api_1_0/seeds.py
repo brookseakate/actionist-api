@@ -67,7 +67,8 @@ def generate_title_and_headline(action_type, pro=True):
     head_words = fake.words(randint(1, 4))
     head_words.append(issue)
     shuffle(head_words)
-    headline = " ".join(head_words).title() + "."
+    headline = " ".join(head_words).title()
+    headline += "!" if randint(0, 9) % 3 == 0 else ""
 
     return title, headline, issue
 
@@ -101,7 +102,7 @@ class Seeder:
                     last_name = fake.last_name(),
                     about = fake.text(randrange(5, 2000)), # text of random character length, max 2000 characters
                     street_address_1 = fake.street_address(),
-                    street_address_2 = (fake.street_address() if i % 7 == 0 else None),
+                    street_address_2 = (fake.secondary_address() if i % 7 == 0 else None),
                     city = fake.city(),
                     state = fake.state_abbr(),
                     zip = fake.zipcode())
