@@ -32,3 +32,8 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
