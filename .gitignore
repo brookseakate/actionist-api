@@ -1,4 +1,9 @@
 # ---------------------------------
+# Secrets!
+# ---------------------------------
+config.py
+
+# ---------------------------------
 # Below recommendations from http://www.enigmeta.com/blog/starting-flask/
 # ---------------------------------
 #
