@@ -3,11 +3,11 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
 # relative imports
-from api_1_0.app import app, db
+from api_1_0.app import application, db
 from api_1_0.seeds import Seeder
 
-migrate = Migrate(app, db)
-manager = Manager(app)
+migrate = Migrate(application, db)
+manager = Manager(application)
 manager.add_command('db', MigrateCommand)
 
 # Add seed data to the db

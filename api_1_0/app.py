@@ -5,16 +5,16 @@ from flask_restful import Api
 from flask_httpauth import HTTPBasicAuth
 
 # App setup
-app = Flask(__name__)
-app.config.from_pyfile('../config.py')
-db = SQLAlchemy(app)
-api = Api(app)
+application = Flask(__name__)
+application.config.from_pyfile('../config.py')
+db = SQLAlchemy(application)
+api = Api(application)
 auth = HTTPBasicAuth()
 
 @auth.get_password
 def get_password(username):
     if username == 'authentikate':
-        return app.config['HTTP_AUTH_PASSWORD']
+        return application.config['HTTP_AUTH_PASSWORD']
     return None
 
 @auth.error_handler
