@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, reqparse, fields, marshal
 
 # relative imports
-from ..app import db
+from ..app import db, auth
 from ..models import User
 
 # public field definitions (for use with marshal)
@@ -28,6 +28,8 @@ user_public_fields = {
 
 # define resources, routes, and argument validation
 class UserListAPI(Resource):
+    decorators = [auth.login_required]
+
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('user_name', type = str, location = 'json')
@@ -76,6 +78,8 @@ class UserListAPI(Resource):
             return resp
 
 class UserAPI(Resource):
+    decorators = [auth.login_required]
+    
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('user_name', type = str, location = 'json')

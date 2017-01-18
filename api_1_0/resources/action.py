@@ -2,12 +2,15 @@
 from flask_restful import Resource
 
 # relative imports
+from ..app import auth
 from ..models import CallAction, EmailAction, EventAction
 from call_action import CallActionListAPI, CallActionAPI
 from email_action import EmailActionListAPI, EmailActionAPI
 from event_action import EventActionListAPI, EventActionAPI
 
 class ActionListAPI(Resource):
+    decorators = [auth.login_required]
+
     def get(self):
         # get CallActions
         call_actions = CallActionListAPI()

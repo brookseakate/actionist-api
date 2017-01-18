@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, reqparse, fields, marshal
 
 # relative imports
-from ..app import db
+from ..app import db, auth
 from ..models import EventAction
 
 # public field definitions (for use with marshal)
@@ -30,6 +30,8 @@ event_action_public_fields = {
 
 # define resources, routes, and argument validation
 class EventActionListAPI(Resource):
+    decorators = [auth.login_required]
+
     def __init__(self):
         # @TODO - figure out datetime handling, see http://stackoverflow.com/questions/26662702/what-is-the-datetime-format-for-flask-restful-parser
         self.reqparse = reqparse.RequestParser()
@@ -77,6 +79,8 @@ class EventActionListAPI(Resource):
             return resp
 
 class EventActionAPI(Resource):
+    decorators = [auth.login_required]
+
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('title', type = str, location = 'json')

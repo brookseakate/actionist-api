@@ -1,13 +1,27 @@
 # package imports
-from flask import Flask
+from flask import Flask, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
+from flask_httpauth import HTTPBasicAuth
 
 # App setup
 app = Flask(__name__)
 app.config.from_pyfile('../config.py')
 db = SQLAlchemy(app)
 api = Api(app)
+auth = HTTPBasicAuth()
+
+@auth.get_password
+def get_password(username):
+    if username == 'authentikate':
+        return app.config['HTTP_AUTH_PASSWORD']
+    return None
+
+@auth.error_handler
+def unauthorized():
+    # return 403 instead of 401 to prevent browsers from displaying the default
+    # auth dialog
+    return make_response( jsonify( {'message': 'Unauthorized access'} ), 403)
 
 # relative imports
 from resources.user import UserListAPI, UserAPI
@@ -15,9 +29,6 @@ from resources.call_action import CallActionListAPI, CallActionAPI
 from resources.email_action import EmailActionListAPI, EmailActionAPI
 from resources.event_action import EventActionListAPI, EventActionAPI
 from resources.action import ActionListAPI
-
-# # @TODO - remove, unneeded
-# from models import User, CallAction, EmailAction, EventAction
 
 # register routes
 api.add_resource(UserListAPI, '/api/v1.0/users', endpoint = 'users')
