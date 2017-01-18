@@ -2,6 +2,7 @@
 # Secrets!
 # ---------------------------------
 config.py
+environment.py
 
 # ---------------------------------
 # Below recommendations from http://www.enigmeta.com/blog/starting-flask/
