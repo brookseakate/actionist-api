@@ -15,8 +15,9 @@ print('>>>>>>>>>>kate look here! auth pw: >>>>>>>>' + application.config['HTTP_A
 
 @auth.get_password
 def get_password(username):
+    print('>>>>>>>>>> kate look here! INSIDE get_password function <<<<<<<<<') # @TODO - remove
     if username == 'authentikate':
-        print('>>>>>>>>>>kate look here! username is authentikate! <<<<<<<<<') # @TODO - remove
+        print('>>>>>>>>>> kate look here! username is authentikate! <<<<<<<<<') # @TODO - remove
         return application.config['HTTP_AUTH_PASSWORD']
     return None
 
