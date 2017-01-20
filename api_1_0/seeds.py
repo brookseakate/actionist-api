@@ -41,6 +41,7 @@ def generate_datetimes(type_event=False): # call with True for event_actions, ot
 
     # for event_actions, return start & end listing datetimes, + event start datetime
     if type_event:
+        end = fake.date_time_between(start_date="+12d", end_date="+36d") # updated to ensure all events are in the future. NOTE: *remove* line to return to prior version
         ev_start = end - timedelta(hours = randint(1,10))
         return start, end, ev_start
         # NOTE: ev_start gets returned as datetime.datetime value, whereas start & end are returned as just datetime
@@ -120,13 +121,19 @@ class Seeder:
             talk_point = ("Support " if pro_issue else "Oppose ") + call_issue
             start_date, end_date = generate_datetimes(False)
 
+            if j == 0:
+                phone_number = '2024561111' # White House
+            else:
+                phone_number = generate_phonenumber()
+
             # create Action
             ca = CallAction(title = call_title,
                             headline = call_headline,
                             description = (fake.text(randrange(5, 2000)) if j % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_phone_number = (generate_phonenumber() if j % 2 == 0 else None),
+                            target_phone_number = phone_number,
+                            # target_phone_number = (generate_phonenumber() if j % 2 == 0 else None), # NOTE: Use this to generate numbers for only half of entries
                             target_name = (fake.name() if (j % 2 == 0 or j % 5 == 0) else None),
                             target_official_type = (select_random_official() if j % 2 == 1 else None),
                             script = generate_script(talk_point, randint(40, 1000)),
@@ -156,7 +163,8 @@ class Seeder:
                             description = (fake.text(randrange(5, 2000)) if k % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_email = (fake.email() if k % 2 == 0 else None),
+                            target_email = ('craigslistkate@gmail.com' if k == 0 else fake.email()), # Use this to assign first email address to me, generate all others
+                            # target_email = (fake.email() if k % 2 == 0 else None), # Use this to generate email addresses for only half of entries
                             target_name = (fake.name() if (k % 2 == 0 or k % 5 == 0) else None),
                             target_official_type = (select_random_official() if k % 2 != 0 else None),
                             email_subject = subject,
