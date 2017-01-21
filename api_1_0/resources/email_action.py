@@ -14,8 +14,8 @@ email_action_public_fields = {
     'title': fields.String,
     'headline': fields.String,
     'description': fields.String,
-    'list_start_datetime': fields.DateTime,
-    'list_end_datetime': fields.DateTime,
+    'list_start_datetime': fields.DateTime(dt_format='iso8601'),
+    'list_end_datetime': fields.DateTime(dt_format='iso8601'),
     'target_email': fields.String,
     'target_name': fields.String,
     'target_official_type': fields.String,
@@ -86,7 +86,7 @@ class EmailActionListAPI(Resource):
 
 class EmailActionAPI(Resource):
     decorators = [auth.login_required]
-    
+
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('title', type = str, location = 'json')
