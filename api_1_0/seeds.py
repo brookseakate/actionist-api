@@ -163,7 +163,7 @@ class Seeder:
                             description = (fake.text(randrange(5, 2000)) if k % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_email = ('craigslistkate@gmail.com' if k == 0 else fake.email()), # Use this to assign first email address to me, generate all others
+                            target_email = ('kate@kateshaffer.com' if k == 0 else fake.email()), # Use this to assign first email address to me, generate all others
                             # target_email = (fake.email() if k % 2 == 0 else None), # Use this to generate email addresses for only half of entries
                             target_name = (fake.name() if (k % 2 == 0 or k % 5 == 0) else None),
                             target_official_type = (select_random_official() if k % 2 != 0 else None),
