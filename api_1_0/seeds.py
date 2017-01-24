@@ -20,7 +20,11 @@ fake = Faker()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 def select_random_official():
-    official_types = ["President of the United States", "Vice-President of the United States", "Attorney General", "United States House of Representatives", "United States Senate", "Governor", "State House District", "State Senate District"]
+    # NOTE: restricted list for v1.0
+    official_types = ["United States Representative", "United States Senator"]
+
+    # # NOTE: full list
+    # official_types = ["President of the United States", "Vice-President of the United States", "Attorney General", "United States House of Representatives", "United States Senate", "Governor", "State House District", "State Senate District"]
     return choice(official_types)
 
 def select_random_user():
@@ -50,7 +54,7 @@ def generate_datetimes(type_event=False): # call with True for event_actions, ot
 
 def generate_title_and_headline(action_type, pro=True):
     if action_type == "call":
-        verb = choice(["Call", "Speak Out", "Advocate", "Fight", "Act"])
+        verb = choice(["Speak Out", "Advocate", "Fight", "Act"])
     elif action_type == "event":
         verb = choice(["March", "Stand", "Rise Up", "Fight", "Act", "Community Meeting", "Workshop"])
     elif action_type == "email":
@@ -74,7 +78,7 @@ def generate_title_and_headline(action_type, pro=True):
     return title, headline, issue
 
 def generate_script(point, length):
-    return "Hello. My name is ____, and I am a constituent. I am calling today to ask you to " + point.lower() + ". " + fake.text(length)
+    return "Hello. My name is ____, and I am a constituent. I am calling today to ask you to " + point.lower() + ".\n\n" + fake.text(length).replace('\n', '\n\n')
 
 def generate_phonenumber():
     # generate & validate random 10-digit phone number
@@ -101,7 +105,7 @@ class Seeder:
                     email = fake.email(),
                     first_name = fake.first_name(),
                     last_name = fake.last_name(),
-                    about = fake.text(randrange(5, 2000)), # text of random character length, max 2000 characters
+                    about = fake.text(randrange(5, 1000)).replace('\n', '\n\n'), # text of random character length, max 1000 characters
                     street_address_1 = fake.street_address(),
                     street_address_2 = (fake.secondary_address() if i % 7 == 0 else None),
                     city = fake.city(),
@@ -123,23 +127,27 @@ class Seeder:
 
             if j == 0:
                 phone_number = '2024561111' # White House
-            else:
+            elif ( j != 0 and j % 2 == 0 ):
                 phone_number = generate_phonenumber()
+            else:
+                phone_number = None
+
+            print(phone_number)
 
             # create Action
             ca = CallAction(title = call_title,
                             headline = call_headline,
-                            description = (fake.text(randrange(5, 2000)) if j % 11 != 0 else None),
+                            description = (fake.text(randrange(5, 1000)).replace('\n', '\n\n') if j % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_phone_number = phone_number,
+                            target_phone_number = phone_number, # uses logic from above
                             # target_phone_number = (generate_phonenumber() if j % 2 == 0 else None), # NOTE: Use this to generate numbers for only half of entries
                             target_name = (fake.name() if (j % 2 == 0 or j % 5 == 0) else None),
                             target_official_type = (select_random_official() if j % 2 == 1 else None),
                             script = generate_script(talk_point, randint(40, 1000)),
                             talking_point_1 = talk_point,
-                            talking_point_2 = (fake.text(randrange(5, 70)) if j % 4 != 0 else None),
-                            talking_point_3 = (fake.text(randrange(5, 70)) if j % 8 == 1 else None),
+                            talking_point_2 = (fake.text(randrange(5, 70)).replace('\n', '\n\n') if j % 4 != 0 else None),
+                            talking_point_3 = (fake.text(randrange(5, 70)).replace('\n', '\n\n') if j % 8 == 1 else None),
                             kudos_text = select_kudos_text(),
                             user = select_random_user()
                             )
@@ -157,18 +165,27 @@ class Seeder:
             subject = ("Support " if pro_issue else "Oppose ") + email_issue
             start_date, end_date = generate_datetimes(False)
 
+            # Select email
+            if k == 0:
+                email_address = 'kate@kateshaffer.com'
+            elif ( k != 0 and k % 2 == 0 ):
+                email_address = fake.email()
+            else:
+                email_address = None
+
             # create Action
             ema = EmailAction(title = email_title,
                             headline = email_headline,
-                            description = (fake.text(randrange(5, 2000)) if k % 11 != 0 else None),
+                            description = (fake.text(randrange(5, 1000)).replace('\n', '\n\n') if k % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_email = ('kate@kateshaffer.com' if k == 0 else fake.email()), # Use this to assign first email address to me, generate all others
+                            target_email = email_address, # Use this to follow logic above (1st email me, alternate others with faker/None)
+                            # target_email = ('kate@kateshaffer.com' if k == 0 else fake.email()), # Use this to assign first email address to me, generate all others
                             # target_email = (fake.email() if k % 2 == 0 else None), # Use this to generate email addresses for only half of entries
                             target_name = (fake.name() if (k % 2 == 0 or k % 5 == 0) else None),
                             target_official_type = (select_random_official() if k % 2 != 0 else None),
                             email_subject = subject,
-                            body = fake.text(randrange(5, 2500)),
+                            body = fake.text(randrange(5, 1000)).replace('\n', '\n\n'),
                             kudos_text = select_kudos_text(),
                             user = select_random_user()
                             )
@@ -188,10 +205,10 @@ class Seeder:
             # create CallAction
             eva = EventAction(title = event_title,
                             headline = event_headline,
-                            description = (fake.text(randrange(5, 2000)) if l % 11 != 0 else None),
+                            description = (fake.text(randrange(5, 1000)).replace('\n', '\n\n') if l % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            location = fake.address(),
+                            location = fake.address().replace('\n', ', '),
                             event_start_datetime = event_start,
                             event_end_datetime = end_date,
                             kudos_text = select_kudos_text(),
