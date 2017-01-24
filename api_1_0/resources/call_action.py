@@ -24,9 +24,9 @@ call_action_public_fields = {
     'talking_point_2': fields.String,
     'talking_point_3': fields.String,
     'kudos_text': fields.String,
-    'uri': fields.Url('call_action', absolute=True),
+    # 'uri': fields.Url('call_action', absolute=True),
     # @TODO: use below version for https!
-    # 'uri': fields.Url('call_action', absolute=True, scheme='https')
+    'uri': fields.Url('call_action', absolute=True, scheme='https'),
     'user_id': fields.Integer
     # # @TODO - add user_uri?
     # 'user_uri': field.Url('user', absolute=True)

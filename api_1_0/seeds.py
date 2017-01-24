@@ -132,8 +132,6 @@ class Seeder:
             else:
                 phone_number = None
 
-            print(phone_number)
-
             # create Action
             ca = CallAction(title = call_title,
                             headline = call_headline,

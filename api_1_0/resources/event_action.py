@@ -20,9 +20,9 @@ event_action_public_fields = {
     'event_start_datetime': fields.DateTime(dt_format='iso8601'),
     'event_end_datetime': fields.DateTime(dt_format='iso8601'),
     'kudos_text': fields.String,
-    'uri': fields.Url('event_action', absolute=True),
+    # 'uri': fields.Url('event_action', absolute=True),
     # @TODO: use below version for https!
-    # 'uri': fields.Url('event_action', absolute=True, scheme='https')
+    'uri': fields.Url('event_action', absolute=True, scheme='https'),
     'user_id': fields.Integer
     # # @TODO - add user_uri?
     # 'user_uri': field.Url('user', absolute=True)

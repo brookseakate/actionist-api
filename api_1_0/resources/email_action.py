@@ -22,9 +22,9 @@ email_action_public_fields = {
     'email_subject': fields.String,
     'email_body': fields.String(attribute='body'),
     'kudos_text': fields.String,
-    'uri': fields.Url('email_action', absolute=True),
+    # 'uri': fields.Url('email_action', absolute=True),
     # @TODO: use below version for https!
-    # 'uri': fields.Url('email_action', absolute=True, scheme='https')
+    'uri': fields.Url('email_action', absolute=True, scheme='https'),
     'user_id': fields.Integer
     # # @TODO - add user_uri?
     # 'user_uri': field.Url('user', absolute=True)
