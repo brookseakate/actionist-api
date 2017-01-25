@@ -50,7 +50,7 @@ p {
 // Navigation
 
 .navbar-default {
-    background-color: white;
+    background-color: @theme-secondary;
     border-color: fade(@gray-darker, 5%);
     .transition-all;
     .heading-font;
@@ -93,8 +93,8 @@ p {
         }
     }
     @media (min-width: 768px) {
-        background-color: transparent;
-        border-color: transparent;
+        background-color: @theme-secondary;
+        border-color: @theme-secondary;
         .navbar-header .navbar-brand {
             color: fade(white, 70%);
             &:hover,
@@ -137,11 +137,11 @@ header {
     width: 100%;
     min-height: auto;
     overflow-y: hidden;
-    background-color: @theme-secondary;
+    background-color: #FFF;
     // background: url("../img/bg-pattern.png"), @theme-secondary; /* fallback for old browsers */
     // background: url("../img/bg-pattern.png"), -webkit-linear-gradient(to left, @theme-secondary , @theme-tertiary); /* Chrome 10-25, Safari 5.1-6 */
     // background: url("../img/bg-pattern.png"), linear-gradient(to left, @theme-secondary , @theme-tertiary); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: white;
+    color: @theme-secondary;
     .header-content {
         text-align: center;
         padding: 150px 0 50px;
@@ -398,6 +398,14 @@ footer {
     background: linear-gradient(@theme-primary , darken(@theme-primary, 5%));
 }
 
+.bg-secondary {
+    background: @theme-secondary;
+    background: -webkit-linear-gradient(@theme-secondary , darken(@theme-secondary, 5%));
+    background: linear-gradient(@theme-secondary , darken(@theme-secondary, 5%));
+}
+
+
+
 .text-primary {
     color: @theme-primary;
 }
@@ -409,8 +417,8 @@ footer {
 
 // Button Styles
 .btn-outline {
-    color: white;
-    border-color: white;
+    color: @theme-secondary;
+    border-color: @theme-secondary;
     border: 1px solid;
     &:hover,
     &:focus,
