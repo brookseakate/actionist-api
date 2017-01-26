@@ -147,7 +147,7 @@ header {
   min-height: auto;
   overflow-y: hidden;
   background-color: #FFF;
-  color: #555;
+  color: #000;
 }
 header .header-content {
   text-align: center;
@@ -217,31 +217,10 @@ section h2 {
 section.download {
   padding: 150px 0;
   position: relative;
+  color: #FFF;
 }
 section.download h2 {
   margin-top: 0;
-  font-size: 50px;
-}
-section.download .badges .badge-link {
-  display: block;
-  margin-bottom: 25px;
-}
-section.download .badges .badge-link:last-child {
-  margin-bottom: 0;
-}
-section.download .badges .badge-link img {
-  height: 60px;
-}
-@media (min-width: 768px) {
-  section.download .badges .badge-link {
-    display: inline-block;
-    margin-bottom: 0;
-  }
-}
-@media (min-width: 768px) {
-  section.download h2 {
-    font-size: 70px;
-  }
 }
 section.contact {
   text-align: center;
@@ -250,6 +229,13 @@ section.contact {
 section.contact h2 {
   margin-top: 0;
   margin-bottom: 25px;
+  font-size: 50px;
+}
+.feature-list {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 18px;
+  text-align: left;
 }
 footer {
   background-color: #222222;
@@ -291,6 +277,16 @@ footer ul li a.active {
   padding-right: 0;
   padding-left: 0;
 }
+.email-link {
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  color: #87ceeb;
+}
+.email-link:hover,
+.email-link:focus {
+  color: #5bbce4;
+}
 .btn-outline {
   color: #555;
   border-color: #555;
@@ -303,6 +299,19 @@ footer ul li a.active {
   color: white;
   background-color: #4682B4;
   border-color: #4682B4;
+}
+.btn-github {
+  color: white;
+  border-color: white;
+  border: 1px solid;
+}
+.btn-github:hover,
+.btn-github:focus,
+.btn-github:active,
+.btn-github.active {
+  color: #4682B4;
+  background-color: white;
+  border-color: white;
 }
 .btn {
   font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
