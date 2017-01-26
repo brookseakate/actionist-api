@@ -24,8 +24,6 @@ call_action_public_fields = {
     'talking_point_2': fields.String,
     'talking_point_3': fields.String,
     'kudos_text': fields.String,
-    # 'uri': fields.Url('call_action', absolute=True),
-    # @TODO: use below version for https!
     'uri': fields.Url('call_action', absolute=True, scheme='https'),
     'user_id': fields.Integer
     # # @TODO - add user_uri?
@@ -37,7 +35,6 @@ class CallActionListAPI(Resource):
     decorators = [auth.login_required]
 
     def __init__(self):
-        # @TODO - figure out datetime handling, see http://stackoverflow.com/questions/26662702/what-is-the-datetime-format-for-flask-restful-parser
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('title', type = str, required = True, help = 'A title is required', location = 'json')
         self.reqparse.add_argument('headline', type = str, location = 'json')
@@ -83,7 +80,6 @@ class CallActionListAPI(Resource):
             # or could set new_call_action.user(User.query.get(['user_id']))
             return { 'call_action': marshal(new_call_action, call_action_public_fields) }, 201
 
-        # @TODO - fix error handling here (session not rolling back properly. Also is clobbering validation errors into generic 400s)
         except Exception as err:
             db.session.rollback()
             resp = jsonify({"error": str(err)})
@@ -117,7 +113,6 @@ class CallActionAPI(Resource):
         return { 'call_action': marshal(call_action, call_action_public_fields) }
 
     def put(self, id):
-        # @TODO - add error handling (see POST)
         call_action = CallAction.query.get_or_404(id)
         args = self.reqparse.parse_args()
         for k, v in args.iteritems():

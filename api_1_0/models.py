@@ -45,9 +45,6 @@ class User(db.Model, CRUD):
     def __repr__(self):
         return '<User %r>' % self.user_name
 
-    # # @TODO - implement or remove __init__'s
-    # def __init__(self, ..args)
-
 # CallAction model
 class CallAction(db.Model, CRUD):
     __tablename__ = 'call_actions'

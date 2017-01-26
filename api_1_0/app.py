@@ -11,21 +11,15 @@ db = SQLAlchemy(application)
 api = Api(application)
 auth = HTTPBasicAuth()
 
-# print('>>>>>>>>>>kate look here! auth pw: >>>>>>>>' + application.config['HTTP_AUTH_PASSWORD']) # NOTE: log/debug
-
 @auth.get_password
 def get_password(username):
-    # print('>>>>>>>>>> kate look here! INSIDE get_password function <<<<<<<<<') # NOTE: log/debug
     if username == 'authentikate':
-        # print('>>>>>>>>>> kate look here! username is authentikate! <<<<<<<<<') # NOTE: log/debug
         return application.config['HTTP_AUTH_PASSWORD']
     return None
 
 @auth.error_handler
 def unauthorized():
-    # return 403 instead of 401 to prevent browsers from displaying the default
-    # auth dialog
-    # return make_response( jsonify( {'message': 'Unauthorized access from error handler'} ), 403) # NOTE: log/debug
+    # return 403 instead of 401 to prevent browsers from displaying the default auth dialog
     return make_response( jsonify( {'message': 'Unauthorized access'} ), 403)
 
 # relative imports

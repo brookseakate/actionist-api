@@ -11,7 +11,7 @@ from ..models import User
 user_public_fields = {
     'id': fields.Integer,
     'user_name': fields.String,
-    'device_id': fields.String, # @TODO - remove?
+    'device_id': fields.String,
     'email': fields.String,
     'first_name': fields.String,
     'last_name': fields.String,
@@ -21,9 +21,7 @@ user_public_fields = {
     'city': fields.String,
     'state': fields.String,
     'zip': fields.String,
-    'uri': fields.Url('user', absolute=True)
-    # @TODO: use below version for https!
-    # 'uri': fields.Url('user', absolute=True, scheme='https')
+    'uri': fields.Url('user', absolute=True, scheme='https')
 }
 
 # define resources, routes, and argument validation
@@ -34,7 +32,7 @@ class UserListAPI(Resource):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('user_name', type = str, location = 'json')
         self.reqparse.add_argument('device_id', type = str, location = 'json')
-        # # @TODO - require device_id argument!
+        # # @TODO - require device_id argument
         # self.reqparse.add_argument('device_id', type = str, required = True, help = 'Device ID required', location = 'json')
         self.reqparse.add_argument('email', type = str, location = 'json')
         self.reqparse.add_argument('first_name', type = str, location = 'json')
@@ -70,7 +68,7 @@ class UserListAPI(Resource):
             )
             new_user.add(new_user)
             return { 'user': marshal(new_user, user_public_fields) }, 201
-        # @TODO - fix error handling here (session not rolling back properly. Also clobbering validation errors into generic 400s)
+
         except Exception as err:
             db.session.rollback()
             resp = jsonify({"error": str(err)})
@@ -79,7 +77,7 @@ class UserListAPI(Resource):
 
 class UserAPI(Resource):
     decorators = [auth.login_required]
-    
+
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('user_name', type = str, location = 'json')
@@ -101,7 +99,6 @@ class UserAPI(Resource):
         return { 'user': marshal(user, user_public_fields) }
 
     def put(self, id):
-        # @TODO - add error handling (see POST)
         user = User.query.get_or_404(id)
         args = self.reqparse.parse_args()
         for k, v in args.iteritems():

@@ -20,8 +20,6 @@ event_action_public_fields = {
     'event_start_datetime': fields.DateTime(dt_format='iso8601'),
     'event_end_datetime': fields.DateTime(dt_format='iso8601'),
     'kudos_text': fields.String,
-    # 'uri': fields.Url('event_action', absolute=True),
-    # @TODO: use below version for https!
     'uri': fields.Url('event_action', absolute=True, scheme='https'),
     'user_id': fields.Integer
     # # @TODO - add user_uri?
@@ -33,7 +31,6 @@ class EventActionListAPI(Resource):
     decorators = [auth.login_required]
 
     def __init__(self):
-        # @TODO - figure out datetime handling, see http://stackoverflow.com/questions/26662702/what-is-the-datetime-format-for-flask-restful-parser
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('title', type = str, required = True, help = 'A title is required', location = 'json')
         self.reqparse.add_argument('headline', type = str, location = 'json')
@@ -71,7 +68,6 @@ class EventActionListAPI(Resource):
             # or could set new_event_action.user(User.query.get(['user_id']))
             return { 'event_action': marshal(new_event_action, event_action_public_fields) }, 201
 
-        # @TODO - fix error handling here (session not rolling back properly. Also is clobbering validation errors into generic 400s)
         except Exception as err:
             db.session.rollback()
             resp = jsonify({"error": str(err)})
@@ -101,7 +97,6 @@ class EventActionAPI(Resource):
         return { 'event_action': marshal(event_action, event_action_public_fields) }
 
     def put(self, id):
-        # @TODO - add error handling (see POST)
         event_action = EventAction.query.get_or_404(id)
         args = self.reqparse.parse_args()
         for k, v in args.iteritems():

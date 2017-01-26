@@ -45,10 +45,10 @@ def generate_datetimes(type_event=False): # call with True for event_actions, ot
 
     # for event_actions, return start & end listing datetimes, + event start datetime
     if type_event:
-        end = fake.date_time_between(start_date="+12d", end_date="+36d") # updated to ensure all events are in the future. NOTE: *remove* line to return to prior version
+        end = fake.date_time_between(start_date="+12d", end_date="+36d") # updated to ensure all events are in the future.
         ev_start = end - timedelta(hours = randint(1,10))
         return start, end, ev_start
-        # NOTE: ev_start gets returned as datetime.datetime value, whereas start & end are returned as just datetime
+
     # for other action types, return just start & end listing datetimes
     return start, end
 
@@ -105,7 +105,7 @@ class Seeder:
                     email = fake.email(),
                     first_name = fake.first_name(),
                     last_name = fake.last_name(),
-                    about = fake.text(randrange(5, 1000)).replace('\n', '\n\n'), # text of random character length, max 1000 characters
+                    about = fake.text(randrange(5, 1000)).replace('\n', '\n\n'), # random length, max 1000 characters, replace newlines with double-newlines
                     street_address_1 = fake.street_address(),
                     street_address_2 = (fake.secondary_address() if i % 7 == 0 else None),
                     city = fake.city(),
@@ -125,8 +125,9 @@ class Seeder:
             talk_point = ("Support " if pro_issue else "Oppose ") + call_issue
             start_date, end_date = generate_datetimes(False)
 
+            # Set phone number. For first seed: the White House. Remaining seeds: half random, half empty
             if j == 0:
-                phone_number = '2024561111' # White House
+                phone_number = '2024561111' # The White House
             elif ( j != 0 and j % 2 == 0 ):
                 phone_number = generate_phonenumber()
             else:
@@ -138,8 +139,7 @@ class Seeder:
                             description = (fake.text(randrange(5, 1000)).replace('\n', '\n\n') if j % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_phone_number = phone_number, # uses logic from above
-                            # target_phone_number = (generate_phonenumber() if j % 2 == 0 else None), # NOTE: Use this to generate numbers for only half of entries
+                            target_phone_number = phone_number,
                             target_name = (fake.name() if (j % 2 == 0 or j % 5 == 0) else None),
                             target_official_type = (select_random_official() if j % 2 == 1 else None),
                             script = generate_script(talk_point, randint(40, 1000)),
@@ -163,7 +163,7 @@ class Seeder:
             subject = ("Support " if pro_issue else "Oppose ") + email_issue
             start_date, end_date = generate_datetimes(False)
 
-            # Select email
+            # Set email. For first seed: me. Remaining seeds: half random, half empty
             if k == 0:
                 email_address = 'kate@kateshaffer.com'
             elif ( k != 0 and k % 2 == 0 ):
@@ -177,9 +177,7 @@ class Seeder:
                             description = (fake.text(randrange(5, 1000)).replace('\n', '\n\n') if k % 11 != 0 else None),
                             list_start_datetime = start_date,
                             list_end_datetime = end_date,
-                            target_email = email_address, # Use this to follow logic above (1st email me, alternate others with faker/None)
-                            # target_email = ('kate@kateshaffer.com' if k == 0 else fake.email()), # Use this to assign first email address to me, generate all others
-                            # target_email = (fake.email() if k % 2 == 0 else None), # Use this to generate email addresses for only half of entries
+                            target_email = email_address, 
                             target_name = (fake.name() if (k % 2 == 0 or k % 5 == 0) else None),
                             target_official_type = (select_random_official() if k % 2 != 0 else None),
                             email_subject = subject,

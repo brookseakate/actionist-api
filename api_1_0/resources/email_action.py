@@ -22,8 +22,6 @@ email_action_public_fields = {
     'email_subject': fields.String,
     'email_body': fields.String(attribute='body'),
     'kudos_text': fields.String,
-    # 'uri': fields.Url('email_action', absolute=True),
-    # @TODO: use below version for https!
     'uri': fields.Url('email_action', absolute=True, scheme='https'),
     'user_id': fields.Integer
     # # @TODO - add user_uri?
@@ -35,7 +33,6 @@ class EmailActionListAPI(Resource):
     decorators = [auth.login_required]
 
     def __init__(self):
-        # @TODO - figure out datetime handling, see http://stackoverflow.com/questions/26662702/what-is-the-datetime-format-for-flask-restful-parser
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('title', type = str, required = True, help = 'A title is required', location = 'json')
         self.reqparse.add_argument('headline', type = str, location = 'json')
@@ -77,7 +74,6 @@ class EmailActionListAPI(Resource):
             # or could set new_email_action.user(User.query.get(['user_id']))
             return { 'email_action': marshal(new_email_action, email_action_public_fields) }, 201
 
-        # @TODO - fix error handling here (session not rolling back properly. Also is clobbering validation errors into generic 400s)
         except Exception as err:
             db.session.rollback()
             resp = jsonify({"error": str(err)})
@@ -109,7 +105,6 @@ class EmailActionAPI(Resource):
         return { 'email_action': marshal(email_action, email_action_public_fields) }
 
     def put(self, id):
-        # @TODO - add error handling (see POST)
         email_action = EmailAction.query.get_or_404(id)
         args = self.reqparse.parse_args()
         for k, v in args.iteritems():
