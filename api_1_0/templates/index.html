@@ -11,6 +11,9 @@
 
     <title>Actionist App</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
     <!-- Bootstrap Core CSS -->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -61,7 +64,7 @@
                 <div class="col-sm-7">
                     <div class="header-content">
                         <div class="header-content-inner">
-                            <h1>Take Action for Social Justice from your mobile device.</h1>
+                            <h1>Take Action for social justice from your mobile device</h1>
                             <a href="#download" class="btn btn-outline btn-xl page-scroll">Get the Code</a>
                         </div>
                     </div>
@@ -87,12 +90,11 @@
 
     <section id="contact" class="contact bg-secondary">
       <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
         <h2 class="section-heading">About</h2>
         <p>
-          Actionist is an iOS app and REST API created by <a class="email-link" href="http://kateshaffer.com">Kate Shaffer</a> as an Ada Developers Academy Capstone Project.
-        </p>
-        <p>
-          Use Actionist to find and complete Social Justice Actions on the go:
+          Use Actionist to find and complete social justice actions on the go:
         </p>
           <div class="feature-list">
             <ul>
@@ -107,6 +109,13 @@
               </li>
             </ul>
           </div>
+          <br />
+        <p>
+          Actionist is an iOS app and REST API created by <a class="email-link" href="http://kateshaffer.com">Kate Shaffer</a> as an Ada Developers Academy Capstone Project. The iOS app is built in JavaScript with React Native.
+          The API is built in Python using Flask, SQLAlchemy, Alembic, and Flask-HTTPAuth. It's hosted on AWS Elastic Beanstalk with a Postgres database.
+        </p>
+      </div>
+      </div>
       </div>
     </section>
 
@@ -116,12 +125,6 @@
                 <div class="col-md-8 col-md-offset-2">
                     <h2>Get the Code</h2>
                     <p>Actionist is currently in development.
-                    </p>
-                    <p>
-                      The Actionist iOS app is built in JavaScript using React Native.
-                    </p>
-                    <p>
-                      The Actionist API is built in Python with Flask, SQLAlchemy, Alembic, and HTTPAuth. The API is hosted on AWS Elastic Beanstalk using a Postgres database.
                     </p>
                     <p>
                       Check out the code on github, and <a class="email-link" href="mailto:kate@kateshaffer.com?subject=I want to help with develop Actionist!">reach out if you'd like to help!</a>
@@ -144,7 +147,7 @@
               <a href="https://thenounproject.com/term/fist/15242/">Protest by Chris Kerr from the Noun Project</a>
             </p>
             <p>
-              Bootstrap Theme:
+              Bootstrap Theme based on:
                   <a href="https://startbootstrap.com/template-overviews/new-age/"> New Age</a>
             </p>
             <br />
