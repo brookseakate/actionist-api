@@ -46,10 +46,13 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a class="page-scroll" href="#contact">About</a>
+            <a class="page-scroll" href="#about">About</a>
           </li>
           <li>
-            <a class="page-scroll" href="#download">Get the Code</a>
+            <a class="page-scroll" href="#features">Features</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#see-code">See the Code</a>
           </li>
         </ul>
       </div>
@@ -65,7 +68,7 @@
           <div class="header-content">
             <div class="header-content-inner">
               <h1>Take Action for social justice from your mobile device</h1>
-              <a href="#download" class="btn btn-outline btn-xl page-scroll">Get the Code</a>
+              <a href="#about" class="btn btn-outline btn-xl page-scroll">About</a>
             </div>
           </div>
         </div>
@@ -87,56 +90,74 @@
     </div>
   </header>
 
-  <section id="contact" class="contact bg-secondary">
+  <section id="about" class="about bg-darkgray">
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <h2 class="section-heading">About</h2>
           <p>
-            Use Actionist to find and complete social justice actions on the go:
+            Actionist is an iOS app and REST API created for an Ada Developers Academy Capstone Project by <a class="email-link" href="http://kateshaffer.com">Kate Shaffer</a>. The goal of the project is to streamline engagement with social justice and political actions from a mobile device.
           </p>
-          <div class="feature-list">
-            <ul>
-              <li>
-                Add an event to your calendar
-              </li>
-              <li>
-                Call an Elected Official
-              </li>
-              <li>
-                Email an Elected Official
-              </li>
-            </ul>
-          </div>
-          <br />
           <p>
-            Actionist is an iOS app and REST API created by <a class="email-link" href="http://kateshaffer.com">Kate Shaffer</a> as an Ada Developers Academy Capstone Project. The iOS app is built in JavaScript with React Native.
-            The API is built in Python using Flask, SQLAlchemy, Alembic, and Flask-HTTPAuth. It's hosted on AWS Elastic Beanstalk with a Postgres database.
+            You shouldn't have to use several different tools to learn about social justice actions, find elected officials, place calls, send emails, and add events to your calendar. Actionist aims to pull multiple technologies together – so you can focus more on taking action, less on navigating your tech.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="download" class="download bg-primary text-center">
+    <section id="features" class="features bg-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h2>Features</h2>
+            <p>
+              Use Actionist to find and complete social justice actions on the go:
+            </p>
+            <div class="feature-list">
+              <ul>
+                <li>
+                  Add an event to your calendar
+                </li>
+                <li>
+                  Call an Elected Official
+                </li>
+                <li>
+                  Email an Elected Official
+                </li>
+              </ul>
+            </div>
+            <p>
+              More features coming soon, including: search for Elected Officials, user action contributions, push notifications, action reminders.
+            </p>
+            <br />
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section id="see-code" class="see-code bg-secondary">
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h2>Get the Code</h2>
+          <h2>See the Code</h2>
           <p>Actionist is currently in development.
+          </p>
+          <p>
+            The iOS app is built in JavaScript with React Native. The API is built in Python using Flask, SQLAlchemy, Alembic, and Flask-HTTPAuth. It's hosted on AWS Elastic Beanstalk with a Postgres RDS database.
           </p>
           <p>
             Check out the code on github, and <a class="email-link" href="mailto:kate@kateshaffer.com?subject=I want to help with develop Actionist!">reach out if you'd like to help!</a>
           </p>
-          <div class="badges">
-            <a href="https://github.com/brookseakate/act-for-justice-ios" class="btn btn-github btn-xl">iOS app code on Github</a>
-            <a href="https://github.com/brookseakate/act-for-justice-api" class="btn btn-github btn-xl">API code on Github</a>
+          <div class="badges text-center">
+            <a href="https://github.com/brookseakate/actionist-ios" class="btn btn-github btn-xl">iOS app code on Github</a>
+            <a href="https://github.com/brookseakate/actionist-api" class="btn btn-github btn-xl">API code on Github</a>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- @TODO - add features section -->
+
   <footer>
     <div class="container">
       <p>
@@ -144,7 +165,7 @@
         <a href="https://thenounproject.com/term/fist/15242/">Protest by Chris Kerr from the Noun Project</a>
       </p>
       <p>
-        Bootstrap Theme derived from:
+        Bootstrap Theme from:
         <a href="https://startbootstrap.com/template-overviews/new-age/"> New Age</a>
       </p>
       <br />
