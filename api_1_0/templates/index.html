@@ -26,18 +26,9 @@
 
     <!-- Theme CSS -->
     <link href="/static/css/new-age.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body id="page-top">
-
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -52,13 +43,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#download">About</a>
+                      <a class="page-scroll" href="#contact">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#features">Features</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#download">Get the Code</a>
                     </li>
                 </ul>
             </div>
@@ -73,8 +61,8 @@
                 <div class="col-sm-7">
                     <div class="header-content">
                         <div class="header-content-inner">
-                            <h1>New Age is an app landing page that will help you beautifully showcase your new mobile app, or anything else!</h1>
-                            <a href="#download" class="btn btn-outline btn-xl page-scroll">Start Now for Free!</a>
+                            <h1>Take Action for Social Justice from your mobile device.</h1>
+                            <a href="#download" class="btn btn-outline btn-xl page-scroll">Get the Code</a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +72,7 @@
                             <div class="device">
                                 <div class="screen">
                                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                    <img src="/static/img/demo-screen-1.jpg" class="img-responsive" alt="">
+                                    <img src="/static/img/actionist-home.png" class="img-responsive" alt="">
                                 </div>
                                 <div class="button">
                                     <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -97,127 +85,70 @@
         </div>
     </header>
 
+    <section id="contact" class="contact bg-secondary">
+      <div class="container">
+        <h2 class="section-heading">About</h2>
+        <p>
+          Actionist is an iOS app and REST API created by <a class="email-link" href="http://kateshaffer.com">Kate Shaffer</a> as an Ada Developers Academy Capstone Project.
+        </p>
+        <p>
+          Use Actionist to find and complete Social Justice Actions on the go:
+        </p>
+          <div class="feature-list">
+            <ul>
+              <li>
+                Add an event to your calendar
+              </li>
+              <li>
+                Call an Elected Official
+              </li>
+              <li>
+                Email an Elected Official
+              </li>
+            </ul>
+          </div>
+      </div>
+    </section>
+
     <section id="download" class="download bg-primary text-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h2 class="section-heading">Discover what all the buzz is about!</h2>
-                    <p>Our app is available on any mobile device! Download now to get started!</p>
+                    <h2>Get the Code</h2>
+                    <p>Actionist is currently in development.
+                    </p>
+                    <p>
+                      The Actionist iOS app is built in JavaScript using React Native.
+                    </p>
+                    <p>
+                      The Actionist API is built in Python with Flask, SQLAlchemy, Alembic, and HTTPAuth. The API is hosted on AWS Elastic Beanstalk using a Postgres database.
+                    </p>
+                    <p>
+                      Check out the code on github, and <a class="email-link" href="mailto:kate@kateshaffer.com?subject=I want to help with develop Actionist!">reach out if you'd like to help!</a>
+                    </p>
                     <div class="badges">
-                        <a class="badge-link" href="#"><img src="/static/img/google-play-badge.svg" alt=""></a>
-                        <a class="badge-link" href="#"><img src="/static/img/app-store-badge.svg" alt=""></a>
+                        <a href="https://github.com/brookseakate/act-for-justice-ios" class="btn btn-github btn-xl">Actionist iOS app on Github</a>
+                        <a href="https://github.com/brookseakate/act-for-justice-api" class="btn btn-github btn-xl">Actionist API on Github</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-heading">
-                        <h2>Unlimited Features, Unlimited Fun</h2>
-                        <p class="text-muted">Check out what you can do with this app theme!</p>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="device-container">
-                        <div class="device-mockup iphone6_plus portrait black">
-                            <div class="device">
-                                <div class="screen">
-                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                    <img src="/static/img/demo-screen-1.jpg" class="img-responsive" alt=""> </div>
-                                <div class="button">
-                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="feature-item">
-                                    <i class="icon-screen-smartphone text-primary"></i>
-                                    <h3>Device Mockups</h3>
-                                    <p class="text-muted">Ready to use HTML/CSS device mockups, no Photoshop required!</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="feature-item">
-                                    <i class="icon-camera text-primary"></i>
-                                    <h3>Flexible Use</h3>
-                                    <p class="text-muted">Put an image, video, animation, or anything else in the screen!</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="feature-item">
-                                    <i class="icon-present text-primary"></i>
-                                    <h3>Free to Use</h3>
-                                    <p class="text-muted">As always, this theme is free to download and use for any purpose!</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="feature-item">
-                                    <i class="icon-lock-open text-primary"></i>
-                                    <h3>Open Source</h3>
-                                    <p class="text-muted">Since this theme is MIT licensed, you can use it commercially!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <section class="cta">
-        <div class="cta-content">
-            <div class="container">
-                <h2>Stop waiting.<br>Start building.</h2>
-                <a href="#contact" class="btn btn-outline btn-xl page-scroll">Let's Get Started!</a>
-            </div>
-        </div>
-        <div class="overlay"></div>
-    </section>
-
-    <section id="contact" class="contact bg-primary">
-        <div class="container">
-            <h2>We <i class="fa fa-heart"></i> new friends!</h2>
-            <ul class="list-inline list-social">
-                <li class="social-twitter">
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li class="social-facebook">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li class="social-google-plus">
-                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                </li>
-            </ul>
-        </div>
-    </section>
+    <!-- @TODO - add features section -->
 
     <footer>
         <div class="container">
-            <p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
-            <ul class="list-inline">
-                <li>
-                    <a href="#">Privacy</a>
-                </li>
-                <li>
-                    <a href="#">Terms</a>
-                </li>
-                <li>
-                    <a href="#">FAQ</a>
-                </li>
-            </ul>
+            <p>
+              Logo icon:
+              <a href="https://thenounproject.com/term/fist/15242/">Protest by Chris Kerr from the Noun Project</a>
+            </p>
+            <p>
+              Bootstrap Theme:
+                  <a href="https://startbootstrap.com/template-overviews/new-age/"> New Age</a>
+            </p>
+            <br />
+            <p>&copy; 2016 <a href="http://kateshaffer.com">Kate Shaffer</a></p>
         </div>
     </footer>
 
