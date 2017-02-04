@@ -13,7 +13,7 @@ auth = HTTPBasicAuth()
 
 @auth.get_password
 def get_password(username):
-    if username == 'authentikate':
+    if username == application.config['HTTP_AUTH_USERNAME']:
         return application.config['HTTP_AUTH_PASSWORD']
     return None
 
