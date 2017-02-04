@@ -1,1 +1,191 @@
-# actionist-api
+# Actionist API
+
+## About
+
+Actionist is an [iOS app](https://github.com/brookseakate/actionist-ios) and REST API created for my Capstone Project at [Ada Developers Academy](http://adadevelopersacademy.org/). Actionist is intended to streamline engagement with social justice and political actions from a mobile device.
+
+Learn more at: http://actionistapp.com/
+
+Find the iOS app code at: https://github.com/brookseakate/actionist-ios
+
+## Installation
+
+### Dependencies
+#### API Dependencies:
+- [Python 2.7.x](https://www.python.org/downloads/)
+- [Virtualenv](https://virtualenv.pypa.io/en/stable/)
+- [Flask](http://flask.pocoo.org/)
+- [Flask-Script](https://flask-script.readthedocs.io/en/latest/)
+- [Flask-SQLAlchemy](flask-sqlalchemy.pocoo.org)
+- [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+- [Flask-RESTful](http://flask-restful-cn.readthedocs.io/en/latest/)
+- [Flask-HTTPAuth](https://flask-httpauth.readthedocs.io/en/latest/)
+- [python-dotenv](https://github.com/theskumar/python-dotenv)
+
+#### Database Dependencies (if using Postgres):
+- [PostgreSQL](https://www.postgresql.org/)
+  - recommended: [Postgres.app](http://postgresapp.com/)
+  - recommended: [Postico](https://eggerapps.at/postico/)
+- [psycopg2](http://initd.org/psycopg/)
+
+#### Etc:
+- [Python Faker](https://faker.readthedocs.io/en/latest/) (for seed generator scripts)
+- [phonenumbers](https://github.com/daviddrysdale/python-phonenumbers) (for seed generator scripts)
+- recommended: [less](http://lesscss.org/) (for index page CSS)
+
+### Getting Started
+
+Before cloning, be sure all necessary packages listed above are installed and executable from your path. Most packages can be installed with [pip](https://pip.pypa.io/en/stable/). (Here are some helpful getting-started guides for: [Flask](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) and [Using PostgreSQL with Flask](http://killtheyak.com/use-postgresql-with-django-flask/).)
+
+Clone the repo:
+```
+git clone <this-repository-url>
+cd actionist-api
+```
+
+### Configuration
+Actionist API endpoints require HTTP Basic authentication. Assign a username and password for authorized HTTP requests. The application also needs to know your database path.
+
+Define the following environment variables in a .env file:
+
+```
+HTTP_AUTH_PASSWORD = "password"
+
+HTTP_AUTH_USERNAME = "username"
+
+SQLALCHEMY_DATABASE_URI = "your database URI"
+```
+
+Here are some sample database URI formats:
+```
+# Postgres database without a username and password:
+# SQLALCHEMY_DATABASE_URI = "postgresql://hostname/databasename"
+
+# Postgres database with a username and password:
+# SQLALCHEMY_DATABASE_URI = "postgresql://dbusername:dbpassword@hostname/databasename"
+
+# MySQL database:
+# mysql://username:password@hostname/databasename
+
+# SQLite database:
+# sqlite:////absolute/path/to/databasename
+```
+
+### Running for Development
+To run the application locally:
+```
+source venv/bin/activate
+python application.py
+```
+When launched successfully, the application logs will confirm the local server's IP:
+```
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+You can now make requests against your local server.
+
+## Usage
+
+### Authenticating API requests
+Actionist API endpoints require HTTP Basic authentication. Include your username and password with each request.
+
+### REST Endpoints
+
+#### Base URI:
+```
+http://yourserver/api/v1.0/
+```
+
+#### Actions:
+```
+http://yourserver/api/v1.0/actions/
+```
+- GET: Retrieve a list of all Actions (Call, Email, or Event)
+
+#### Call Actions:
+```
+http://yourserver/api/v1.0/call_actions/
+```
+- GET: Retrieve a list of all Call Actions
+- POST: Create a new Call Action
+
+```
+http://yourserver/api/v1.0/call_actions/<id>
+```
+- GET: Retrieve the specified Call Action
+- PUT: Update the specified Call Action
+- DELETE: Delete the specified Call Action
+
+#### Email Actions:
+```
+http://yourserver/api/v1.0/email_actions/
+```
+- GET: Retrieve a list of all Email Actions
+- POST: Create a new Email Action
+
+```
+http://yourserver/api/v1.0/email_actions/<id>
+```
+- GET: Retrieve the specified Email Action
+- PUT: Update the specified Email Action
+- DELETE: Delete the specified Email Action
+
+#### Event Actions:
+```
+http://yourserver/api/v1.0/event_actions/
+```
+- GET: Retrieve a list of all Event Actions
+- POST: Create a new Event Action
+
+```
+http://yourserver/api/v1.0/event_actions/<id>
+```
+- GET: Retrieve the specified Event Action
+- PUT: Update the specified Event Action
+- DELETE: Delete the specified Event Action
+
+#### Users:
+```
+http://yourserver/api/v1.0/users/
+```
+- GET: Retrieve a list of all Users
+- POST: Create a new User
+
+```
+http://yourserver/api/v1.0/users/<id>
+```
+- GET: Retrieve the specified User
+- PUT: Update the specified User
+- DELETE: Delete the specified User
+
+### Sample Curl Requests
+- Get a list of all Actions:
+```
+curl -i -H "Content-Type: application/json" -X GET http://localhost:5000/api/v1.0/actions -u username:password
+```
+
+- Create a new User:
+```
+curl -i -H "Content-Type: application/json" -X POST -d '{ "user_name": "lunarox", "first_name": "Luna", "last_name": "Lovegood", "about": "Spells and outer space", "zip": "98101" }' http://localhost:5000/api/v1.0/users
+```
+
+- Update a Call Action:
+```
+curl -i -H "Content-Type: application/json" -X PUT -d '{ "target_phone_number": "2065551212" }' http://localhost:5000/api/v1.0/call_actions/1 -u username:password
+```
+
+- Delete an Event Action:
+```
+curl -i -H "Content-Type: application/json" -X DELETE http://localhost:5000/api/v1.0/event_actions/123 -u username:password
+```
+
+### Resource Relationships and Parameters
+For more information about API resources and parameters, take a look at the [Actionist ERD](ERD_Actionist_API.pdf).
+
+## Links
+- [Ada Developers Academy](http://adadevelopersacademy.org/)
+- [Actionist App](https://actionistapp.com)
+- [Actionist iOS Code](https://github.com/brookseakate/actionist-ios)
+- [My Website](http://kateshaffer.com)
+- App Icon & Favicon: [Protest by Chris Kerr from the Noun Project](https://thenounproject.com/term/fist/15242)
+- Index page Bootstrap Theme:
+[New Age](https://startbootstrap.com/template-overviews/new-age/)
