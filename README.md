@@ -165,7 +165,7 @@ curl -i -H "Content-Type: application/json" -X GET http://localhost:5000/api/v1.
 
 - Create a new User:
 ```
-curl -i -H "Content-Type: application/json" -X POST -d '{ "user_name": "lunarox", "first_name": "Luna", "last_name": "Lovegood", "about": "Spells and outer space", "zip": "98101" }' http://localhost:5000/api/v1.0/users
+curl -i -H "Content-Type: application/json" -X POST -d '{ "user_name": "lunarox", "first_name": "Luna", "last_name": "Lovegood", "about": "Spells and outer space", "zip": "98101" }' http://localhost:5000/api/v1.0/users -u username:password
 ```
 
 - Update a Call Action:
@@ -187,5 +187,5 @@ For more information about API resources and parameters, take a look at the [Act
 - [Actionist iOS Code](https://github.com/brookseakate/actionist-ios)
 - [My Website](http://kateshaffer.com)
 - App Icon & Favicon: [Protest by Chris Kerr from the Noun Project](https://thenounproject.com/term/fist/15242)
-- Index page Bootstrap Theme:
+- Bootstrap Theme (index page):
 [New Age](https://startbootstrap.com/template-overviews/new-age/)
