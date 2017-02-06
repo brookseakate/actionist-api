@@ -1,7 +1,7 @@
 # Actionist API
 Actionist is an [iOS app](https://github.com/brookseakate/actionist-ios) and REST API created for my Capstone Project at [Ada Developers Academy](http://adadevelopersacademy.org/). Actionist is intended to streamline engagement with social justice and political actions from a mobile device.
 
-From the [iOS App](https://github.com/brookseakate/actionist-ios), Users can retrieve a list of (then act on): Call-, Email-, or Event-type Actions. The Actionist API manages [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for the User, Call Action, Email Action, and Event Action resources.
+From the iOS App, Users can retrieve a list of (then act on): Call-, Email-, or Event-type Actions. The Actionist API manages [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for the User, Call Action, Email Action, and Event Action resources.
 
 Learn more about the project at: http://actionistapp.com/
 
@@ -68,7 +68,7 @@ When launched successfully, the application logs will confirm the local server's
 ```
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
-You can now make requests against your local server.
+You can now make requests against your local server, running at: http://localhost:5000
 
 ## Seeding the Database
 To populate your database using the included seed generator scripts, run `python manage.py dbseed` with the `-c` flag to specify a quantity.
@@ -79,13 +79,13 @@ $ python manage.py dbseed -c 10
 ```
 
 # Usage
-All responses are provided in JSON format.
-
 ## Authenticating API requests
 Actionist API endpoints require HTTP Basic authentication. Include your username and password with each request.
 
 ## REST Endpoints
-NOTE: When running locally, `<yourserver>` will be `localhost:5000` unless otherwise specified.
+All responses are provided in JSON format.
+
+NOTE: When running locally, `<yourserver>` will be `localhost:5000` by default.
 
 ### Base URI:
 ```
@@ -154,7 +154,7 @@ http://<yourserver>/api/v1.0/users/<id>
 - DELETE: Delete the specified User
 
 ## Sample Curl Requests
-These sample requests run against a default local server (`localhost:5000`). Substitute your server location if running on a different host.
+The below sample requests run against a default local server (`localhost:5000`). Substitute your server location if running on a different host.
 
 - Get a list of all Actions:
 ```
@@ -178,6 +178,9 @@ curl -i -H "Content-Type: application/json" -X DELETE http://localhost:5000/api/
 
 ## Resource Relationships and Parameters
 For more information about API resources and parameters, see the [Actionist ERD](ERD_Actionist_API.pdf).
+
+# License
+This project is released open source under the [MIT License](https://github.com/brookseakate/actionist-api/blob/master/LICENSE.txt)
 
 # Links
 - [Ada Developers Academy Website](http://adadevelopersacademy.org/)
