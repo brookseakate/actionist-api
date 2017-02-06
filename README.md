@@ -1,12 +1,14 @@
 # Actionist API
-
 Actionist is an [iOS app](https://github.com/brookseakate/actionist-ios) and REST API created for my Capstone Project at [Ada Developers Academy](http://adadevelopersacademy.org/). Actionist is intended to streamline engagement with social justice and political actions from a mobile device.
 
-Learn more at: http://actionistapp.com/
+From the [iOS App](https://github.com/brookseakate/actionist-ios), Users can retrieve a list of (then act on): Call-, Email-, or Event-type Actions. The Actionist API manages [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for the User, Call Action, Email Action, and Event Action resources.
 
-Find the iOS app code at: https://github.com/brookseakate/actionist-ios
+Learn more about the project at: http://actionistapp.com/
+
+See the iOS app code at: https://github.com/brookseakate/actionist-ios
 
 # Installation
+The Actionist API is written in Python using [Flask](http://flask.pocoo.org/).
 
 ## Dependencies
 ### Core Dependencies:
@@ -32,7 +34,6 @@ Find the iOS app code at: https://github.com/brookseakate/actionist-ios
 - [less](http://lesscss.org/) (recommended, for index page CSS)
 
 ## Getting Started
-
 Before cloning, be sure all necessary packages listed above are installed and executable from your path. Most packages can be installed with [pip](https://pip.pypa.io/en/stable/). (Here are some helpful getting-started guides for [Flask](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) and for [Using PostgreSQL with Flask](http://killtheyak.com/use-postgresql-with-django-flask/).)
 
 Clone the repo:
@@ -44,14 +45,16 @@ $ cd actionist-api
 ## Configuration
 Actionist API endpoints require HTTP Basic authentication. Assign a username and password for authorized HTTP requests. The application also needs to know your database path.
 
-Define the following environment variables in a .env file:
+Define the following environment variables in a `.env` file at the project root:
 
-```
+```python
+# .env
+
 HTTP_AUTH_PASSWORD = "password"
 
 HTTP_AUTH_USERNAME = "username"
 
-SQLALCHEMY_DATABASE_URI = "your database URI"
+SQLALCHEMY_DATABASE_URI = "database://your/database/URI"
 # see sample db URI formats here: http://flask-sqlalchemy.pocoo.org/2.1/config/#configuration-keys
 ```
 
@@ -68,28 +71,26 @@ When launched successfully, the application logs will confirm the local server's
 You can now make requests against your local server.
 
 ## Seeding the Database
-To populate your database using the seed generator scripts, run `python manage.py dbseed` with the `-c` flag to specify a quantity.
+To populate your database using the included seed generator scripts, run `python manage.py dbseed` with the `-c` flag to specify a quantity.
 
 For example, to seed 10 each of Users, Call Actions, Email Actions, and Event Actions, run:
 ```
 $ python manage.py dbseed -c 10
 ```
 
-
 # Usage
+All responses are provided in JSON format.
 
 ## Authenticating API requests
 Actionist API endpoints require HTTP Basic authentication. Include your username and password with each request.
 
 ## REST Endpoints
+NOTE: When running locally, `<yourserver>` will be `localhost:5000` unless otherwise specified.
 
 ### Base URI:
 ```
 http://<yourserver>/api/v1.0/
 ```
-
-- When running locally, `<yourserver>` will be `localhost:5000` unless otherwise specified.
-
 ### Actions:
 ```
 http://<yourserver>/api/v1.0/actions/
@@ -153,7 +154,7 @@ http://<yourserver>/api/v1.0/users/<id>
 - DELETE: Delete the specified User
 
 ## Sample Curl Requests
-Against a local server (`localhost:5000`):
+These sample requests run against a default local server (`localhost:5000`). Substitute your server location if running on a different host.
 
 - Get a list of all Actions:
 ```
@@ -179,8 +180,8 @@ curl -i -H "Content-Type: application/json" -X DELETE http://localhost:5000/api/
 For more information about API resources and parameters, see the [Actionist ERD](ERD_Actionist_API.pdf).
 
 # Links
-- [Ada Developers Academy](http://adadevelopersacademy.org/)
-- [Actionist App](https://actionistapp.com)
+- [Ada Developers Academy Website](http://adadevelopersacademy.org/)
+- [Actionist App Website](https://actionistapp.com)
 - [Actionist iOS Code](https://github.com/brookseakate/actionist-ios)
 - [My Website](http://kateshaffer.com)
 - App Icon & Favicon: [Protest by Chris Kerr from the Noun Project](https://thenounproject.com/term/fist/15242)
