@@ -1,7 +1,7 @@
 # Actionist API
 Actionist is an [iOS app](https://github.com/brookseakate/actionist-ios) and REST API created for my Capstone Project at [Ada Developers Academy](http://adadevelopersacademy.org/). Actionist is intended to streamline engagement with social justice and political actions from a mobile device.
 
-From the iOS App, Users can retrieve a list of (then act on): Call-, Email-, or Event-type Actions. The Actionist API manages [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for the User, Call Action, Email Action, and Event Action resources.
+From the iOS App, Users can retrieve a list of (and act on): Call-, Email-, or Event-type Actions. The Actionist API manages [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for the User, Call Action, Email Action, and Event Action resources.
 
 Learn more about the project at: http://actionistapp.com/
 
@@ -68,7 +68,7 @@ When launched successfully, the application logs will confirm the local server's
 ```
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
-You can now make requests against your local server, running at: http://localhost:5000
+You can now make requests against your local server, running at: [http://localhost:5000](http://localhost:5000)
 
 ## Seeding the Database
 To populate your database using the included seed generator scripts, run `python manage.py dbseed` with the `-c` flag to specify a quantity.
@@ -180,7 +180,7 @@ curl -i -H "Content-Type: application/json" -X DELETE http://localhost:5000/api/
 For more information about API resources and parameters, see the [Actionist ERD](ERD_Actionist_API.pdf).
 
 # License
-This project is released open source under the [MIT License](https://github.com/brookseakate/actionist-api/blob/master/LICENSE.txt)
+This project is released as open source under the [MIT License](https://github.com/brookseakate/actionist-api/blob/master/LICENSE.txt).
 
 # Links
 - [Ada Developers Academy Website](http://adadevelopersacademy.org/)
