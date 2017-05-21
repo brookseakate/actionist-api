@@ -17,7 +17,7 @@ The Actionist API is written in Python using [Flask](http://flask.pocoo.org/).
 - [Flask](http://flask.pocoo.org/)
 - [Flask-Script](https://flask-script.readthedocs.io/en/latest/)
 - [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org)
-- [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+- [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) (Alembic)
 - [Flask-RESTful](http://flask-restful-cn.readthedocs.io/en/latest/)
 - [Flask-HTTPAuth](https://flask-httpauth.readthedocs.io/en/latest/)
 - [python-dotenv](https://github.com/theskumar/python-dotenv)
